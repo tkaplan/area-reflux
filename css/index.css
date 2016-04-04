@@ -1,0 +1,95 @@
+div.container,
+div.header,
+div.body,
+div.footer {
+  max-width: 900px;
+  display: block;
+  margin: auto;
+}
+div.grid-cell {
+  width: 225px;
+  display: inline-block;
+  margin: 20px 0px;
+}
+img.img-item {
+  display: block;
+  margin: 20px auto;
+  max-width: 900px;
+}
+.hover-pointer:hover {
+  cursor: pointer;
+}
+.hover-red:hover {
+  color: #ff0000;
+}
+div.header {
+  height: 30px;
+}
+div.body {
+  min-height: 300px;
+}
+div.backgroundImg {
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  z-index: -1;
+}
+img.backgroundImg {
+  opacity: .15;
+  display: block;
+  margin: auto;
+}
+a.channel {
+  font-family: gt-fine-book;
+  font-size: 13px;
+  text-decoration: underline;
+  color: #333333;
+}
+a.channel:hover {
+  color: #ff0000;
+}
+div.project-navigator {
+  font-family: gt-display-bold;
+  font-size: 15px;
+  color: #333333;
+  text-align: center;
+  margin-top: 30px;
+}
+div.footer {
+  bottom: 0px;
+}
+.footer-link {
+  margin: 0px 5px;
+}
+.footer-link:hover {
+  color: #ff0000;
+  cursor: pointer;
+}
+@font-face {
+  font-family: gt-display-bold;
+  src: url(../fonts/gt-display-bold/gt-sectra-display-bold.ttf);
+}
+@font-face {
+  font-family: gt-fine-book;
+  src: url(../fonts/gt-fine-book/gt-sectra-fine-book.ttf);
+}
+@font-face {
+  font-family: gt-pressura-light;
+  src: url(../fonts/gt-pressura-light/gt-pressura-light.ttf);
+}
+.gt-sectra-display-15 {
+  font-family: gt-display-bold;
+  font-size: 15px;
+}
+.gt-sectra-fine-15 {
+  font-family: gt-fine-book;
+  font-size: 15px;
+}
+.gt-sectra-fine-13 {
+  font-family: gt-fine-book;
+  font-size: 13px;
+}
+.gt-pressura-13 {
+  font-family: gt-pressura-light;
+  font-size: 13px;
+}

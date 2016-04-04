@@ -1,0 +1,35 @@
+@import 'common.less';
+@import 'fonts.less';
+
+div.body:extend(div.container) {
+    min-height: 300px;
+}
+
+div.backgroundImg {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    z-index: -1;
+}
+
+img.backgroundImg {
+    opacity: .15;
+    display: block;
+    margin: auto;
+}
+
+a.channel {
+    .gt-sectra-fine-13;
+    text-decoration: underline;
+    color: #333333;
+    &:hover {
+        color: #ff0000
+    }
+}
+
+div.project-navigator {
+    .gt-sectra-display-15;
+    color: #333333;
+    text-align: center;
+    margin-top: 30px;
+}
