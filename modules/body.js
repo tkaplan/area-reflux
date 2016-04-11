@@ -15,7 +15,7 @@ api.channel = id => `${api.base}/channels/${id}`
 api.block = id => `${api.base}/blocks/${id}`
 
 // User regex to replace this line
-api.authProxy = 'http://localhost:3333/auth'
+api.authProxy = 'http://52.38.12.97:3333/auth'
 
 // Make our authorized requests through proxy
 api.auth = {

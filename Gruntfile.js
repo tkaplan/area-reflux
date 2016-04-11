@@ -36,16 +36,18 @@ module.exports = function (grunt) {
         'connect': {
             'server': {
                 options: {
-                    port: 3000,
-                    directory: '/Users/dev/dev/teamwork/arena-reflux',
+                    port: 80,
+                    directory: '/home/ubuntu/arena-reflux',
                     keepalive: true,
-                    base: {
-                        path: '/Users/dev/dev/teamwork/arena-reflux',
-                        options: {
-                            index: 'index.html',
-                            maxAge: 300000
-                        }
-                    }
+		    index: 'index.html',
+        	    middleware: function(connect, options, middlewares) {
+          middlewares.unshift(function(req, res, next) {
+              res.setHeader('Access-Control-Allow-Origin', '*');
+              next();
+          });
+
+          return middlewares;
+        }    
                 }
             }
         },

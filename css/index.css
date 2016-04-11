@@ -67,15 +67,15 @@ div.footer {
 }
 @font-face {
   font-family: gt-display-bold;
-  src: url(../fonts/gt-display-bold/gt-sectra-display-bold.ttf);
+  src: url(../fonts/gt-display-bold/GT-Sectra-Display-Bold.ttf);
 }
 @font-face {
   font-family: gt-fine-book;
-  src: url(../fonts/gt-fine-book/gt-sectra-fine-book.ttf);
+  src: url(../fonts/gt-fine-book/GT-Sectra-Fine-Book.ttf);
 }
 @font-face {
   font-family: gt-pressura-light;
-  src: url(../fonts/gt-pressura-light/gt-pressura-light.ttf);
+  src: url(../fonts/gt-pressura-light/GT-Pressura-Light.ttf);
 }
 .gt-sectra-display-15 {
   font-family: gt-display-bold;
