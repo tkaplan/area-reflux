@@ -70,6 +70,7 @@ var Footer = React.createClass({
                                 </span>
                             </div>
                             <div className="grid-cell"></div>
+                            <div className="grid-cell"></div>
                             <div className="grid-cell">
                                 <span>
                                     Built with:

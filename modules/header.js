@@ -31,11 +31,11 @@ var Header = React.createClass({
                         <span style={s0} className={c0}>CHRIS COY</span>
                     </div>
                     <div className="grid-cell">
-                    </div>
-                    <div className="grid-cell">
                         <span className={c1}>recent: 
                             <span style={s1_0}>Moscow ben hall</span>
                         </span>
+                    </div>
+                    <div className="grid-cell">
                     </div>
                     <div className="grid-cell">
                         <span style={s2} className={c2}>email@chriscoychriscoy.com</span>
