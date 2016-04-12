@@ -4,10 +4,21 @@ div.container {
     margin: auto;
 }
 
-div.grid-cell {
-    width: 225px;
-    display: inline-block;
-    margin: 20px 0px;
+@media(max-width: 500px) {
+    div.grid-cell {
+        width: 225px;
+        display: inline-block;
+        margin: 10px 0px;
+        padding-left: 25px;
+    } 
+}
+
+@media(min-width: 500px) {
+    div.grid-cell {
+        width: 225px;
+        display: inline-block;
+        margin: 20px 0px;
+    }    
 }
 
 img.img-item {

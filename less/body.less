@@ -5,17 +5,34 @@ div.body:extend(div.container) {
     min-height: 300px;
 }
 
-div.backgroundImg {
-    position: absolute;
-    width: 100%;
-    left: 0px;
-    z-index: -1;
+@media(max-width: 500px) {
+    div.backgroundImg {
+        position: relative;
+        width: 100%;
+        padding-left: 25px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    img.backgroundImg {
+        height: 25%;
+        display: block;
+    } 
 }
 
-img.backgroundImg {
-    opacity: .15;
-    display: block;
-    margin: auto;
+@media(min-width: 500px) {
+    div.backgroundImg {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        z-index: -1;
+    }
+
+    img.backgroundImg {
+        opacity: .15;
+        display: block;
+        margin: auto;
+    }   
 }
 
 a.channel {
@@ -32,4 +49,16 @@ div.project-navigator {
     color: #333333;
     text-align: center;
     margin-top: 30px;
+}
+
+div.loader {
+    background-image: url('/imgs/loader-v2-80.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    z-index: 1000;
+    height: 80%;
+    width: 100%;
 }

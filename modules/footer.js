@@ -25,6 +25,7 @@ var Footer = React.createClass({
         let s1 = {
             position: 'absolute',
             bottom: '0px',
+            left: '0px',
             width: '100%'
         }
         let elem = (
@@ -57,26 +58,38 @@ var Footer = React.createClass({
             window.location.href = href;
         }
         
-        if (location.href.indexOf("channel") === -1)
-            elem = (
-                <div style={s1}>
-                    <div className={c0} style={s0}>
-                        <div className="grid-cell">
-                            <span>SORT:
-                                <span className="footer-link" onClick={sortAZ.bind(this)}>A-Z</span>, 
-                                <span className="footer-link" onClick={sortUpdate.bind(this)}>Last Updated</span>
-                            </span>
-                        </div>
-                        <div className="grid-cell"></div>
-                        <div className="grid-cell">
-                            <span>
-                                Built with:
-                                <span className="footer-link" onClick={changeLocation.bind(this,"https://are.na")}>Are.na</span>
-                            </span>
+        if (location.href.indexOf("channel") === -1) {
+            if (screen.width > 500) {
+                elem = (
+                    <div style={s1}>
+                        <div className={c0} style={s0}>
+                            <div className="grid-cell">
+                                <span>SORT:
+                                    <span className="footer-link" onClick={sortAZ.bind(this)}>A-Z</span>, 
+                                    <span className="footer-link" onClick={sortUpdate.bind(this)}>Last Updated</span>
+                                </span>
+                            </div>
+                            <div className="grid-cell"></div>
+                            <div className="grid-cell">
+                                <span>
+                                    Built with:
+                                    <span className="footer-link" onClick={changeLocation.bind(this,"https://are.na")}>Are.na</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                elem = (
+                    <div className={c0} style={s0}>
+                        <span>SORT:
+                            <span className="footer-link" onClick={sortAZ.bind(this)}>A-Z</span>, 
+                            <span className="footer-link" onClick={sortUpdate.bind(this)}>Last Updated</span>
+                        </span>
+                    </div>
+                )
+            }
+        }
             
         return elem 
     }

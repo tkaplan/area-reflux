@@ -26,24 +26,41 @@ window.drawTable = function (channels) {
     let table = Array.from(new Array(4), () => [])
     let rows = Math.ceil(channels.length / 4)
     let index = 0
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < rows; j++) {
-            if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue
-                table[j][i] = (
-                    <div className="grid-cell">
-                        <a className="channel" href={`#/channel/${channels[index].slug}/${index}`}>
-                            {channels[index].title}
-                        </a>
-                    </div>
-                )
-            index ++
-        }    
+
+    if (screen.width > 500) {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < rows; j++) {
+                if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue
+                    table[j][i] = (
+                        <div className="grid-cell">
+                            <a className="channel" href={`#/channel/${channels[index].slug}/${index}`}>
+                                {channels[index].title}
+                            </a>
+                        </div>
+                    )
+                index ++
+            }    
+        }
+    } else {
+        table = []
+        for (let i = 0; i < channels.length; i ++) {
+            table[i] = (
+                <div className="grid-cell">
+                    <a className="channel" href={`#/channel/${channels[i].slug}/${i}`}>
+                        {channels[i].title}
+                    </a>
+                </div>
+            )
+        }
     }
     return table
 }
 
 var Body = React.createClass({
     getInitialState: function () {
+        this.loader = {
+            display: 'block'
+        }
         window.globalState = {
             s0: {},
             recent: {
@@ -85,6 +102,9 @@ var Body = React.createClass({
             }
         ).then (
             (response) => {
+                this.loader = {
+                    display: 'none'
+                }
                 let channels = response.channels
                 channels = channels.map((_) => {
                     return {
@@ -112,15 +132,20 @@ var Body = React.createClass({
                     window.triggerGlobalUpdate()
                 }
                 img.src = channels[0].contents[0].image.original.url
+                this.forceUpdate()
             }
         )
     },
     render: function () {
         return (
-            <ReactRouter.Router history={ReactRouter.hashHistory}>
-                <ReactRouter.Route path="/" history={ReactRouter.hashHistory} component={Channels}/>
-                <ReactRouter.Route path="/channel/:slug/:index" component={Project}/>
-            </ReactRouter.Router>
+            <div>
+                <div className="loader" style={this.loader}>
+                </div>
+                <ReactRouter.Router history={ReactRouter.hashHistory}>
+                    <ReactRouter.Route path="/" history={ReactRouter.hashHistory} component={Channels}/>
+                    <ReactRouter.Route path="/channel/:slug/:index" component={Project}/>
+                </ReactRouter.Router>
+            </div>
         )
     }
 })

@@ -25,7 +25,8 @@ var Content = React.createClass({
     getInitialState: function () {
         return {
             currentContent: null,
-            lastConent: null
+            lastConent: null,
+            screenWidth: screen.width
         }
     },
     render: function () {

@@ -7,8 +7,8 @@ var Channels = React.createClass({
         let self = this
         window.registerGlobalUpdate('Channels', function () {
             window.globalState.table = window.drawTable(
-                                            window.globalState.channels
-                                        )
+                window.globalState.channels
+            )
             self.forceUpdate()
         })
         self.forceUpdate()

@@ -39,19 +39,35 @@ window.drawTable = function (channels) {
     });
     var rows = Math.ceil(channels.length / 4);
     var index = 0;
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < rows; j++) {
-            if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue;
-            table[j][i] = React.createElement(
+
+    if (screen.width > 500) {
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < rows; j++) {
+                if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue;
+                table[j][i] = React.createElement(
+                    'div',
+                    { className: 'grid-cell' },
+                    React.createElement(
+                        'a',
+                        { className: 'channel', href: '#/channel/' + channels[index].slug + '/' + index },
+                        channels[index].title
+                    )
+                );
+                index++;
+            }
+        }
+    } else {
+        table = [];
+        for (var _i = 0; _i < channels.length; _i++) {
+            table[_i] = React.createElement(
                 'div',
                 { className: 'grid-cell' },
                 React.createElement(
                     'a',
-                    { className: 'channel', href: '#/channel/' + channels[index].slug + '/' + index },
-                    channels[index].title
+                    { className: 'channel', href: '#/channel/' + channels[_i].slug + '/' + _i },
+                    channels[_i].title
                 )
             );
-            index++;
         }
     }
     return table;
@@ -61,6 +77,9 @@ var Body = React.createClass({
     displayName: 'Body',
 
     getInitialState: function getInitialState() {
+        this.loader = {
+            display: 'block'
+        };
         window.globalState = {
             s0: {},
             recent: {
@@ -89,9 +108,14 @@ var Body = React.createClass({
         return window.globalState;
     },
     componentDidMount: function componentDidMount() {
+        var _this = this;
+
         fetch(api.auth.usersChannel('414')).then(function (response) {
             return response.json();
         }).then(function (response) {
+            _this.loader = {
+                display: 'none'
+            };
             var channels = response.channels;
             channels = channels.map(function (_) {
                 return {
@@ -119,14 +143,20 @@ var Body = React.createClass({
                 window.triggerGlobalUpdate();
             };
             img.src = channels[0].contents[0].image.original.url;
+            _this.forceUpdate();
         });
     },
     render: function render() {
         return React.createElement(
-            ReactRouter.Router,
-            { history: ReactRouter.hashHistory },
-            React.createElement(ReactRouter.Route, { path: '/', history: ReactRouter.hashHistory, component: Channels }),
-            React.createElement(ReactRouter.Route, { path: '/channel/:slug/:index', component: Project })
+            'div',
+            null,
+            React.createElement('div', { className: 'loader', style: this.loader }),
+            React.createElement(
+                ReactRouter.Router,
+                { history: ReactRouter.hashHistory },
+                React.createElement(ReactRouter.Route, { path: '/', history: ReactRouter.hashHistory, component: Channels }),
+                React.createElement(ReactRouter.Route, { path: '/channel/:slug/:index', component: Project })
+            )
         );
     }
 });
@@ -209,6 +239,7 @@ var Footer = React.createClass({
         var s1 = {
             position: 'absolute',
             bottom: '0px',
+            left: '0px',
             width: '100%'
         };
         var elem = React.createElement('div', null);
@@ -233,15 +264,55 @@ var Footer = React.createClass({
             window.location.href = href;
         };
 
-        if (location.href.indexOf("channel") === -1) elem = React.createElement(
-            'div',
-            { style: s1 },
-            React.createElement(
-                'div',
-                { className: c0, style: s0 },
-                React.createElement(
+        if (location.href.indexOf("channel") === -1) {
+            if (screen.width > 500) {
+                elem = React.createElement(
                     'div',
-                    { className: 'grid-cell' },
+                    { style: s1 },
+                    React.createElement(
+                        'div',
+                        { className: c0, style: s0 },
+                        React.createElement(
+                            'div',
+                            { className: 'grid-cell' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'SORT:',
+                                React.createElement(
+                                    'span',
+                                    { className: 'footer-link', onClick: sortAZ.bind(undefined) },
+                                    'A-Z'
+                                ),
+                                ',',
+                                React.createElement(
+                                    'span',
+                                    { className: 'footer-link', onClick: sortUpdate.bind(undefined) },
+                                    'Last Updated'
+                                )
+                            )
+                        ),
+                        React.createElement('div', { className: 'grid-cell' }),
+                        React.createElement(
+                            'div',
+                            { className: 'grid-cell' },
+                            React.createElement(
+                                'span',
+                                null,
+                                'Built with:',
+                                React.createElement(
+                                    'span',
+                                    { className: 'footer-link', onClick: changeLocation.bind(undefined, "https://are.na") },
+                                    'Are.na'
+                                )
+                            )
+                        )
+                    )
+                );
+            } else {
+                elem = React.createElement(
+                    'div',
+                    { className: c0, style: s0 },
                     React.createElement(
                         'span',
                         null,
@@ -258,24 +329,9 @@ var Footer = React.createClass({
                             'Last Updated'
                         )
                     )
-                ),
-                React.createElement('div', { className: 'grid-cell' }),
-                React.createElement(
-                    'div',
-                    { className: 'grid-cell' },
-                    React.createElement(
-                        'span',
-                        null,
-                        'Built with:',
-                        React.createElement(
-                            'span',
-                            { className: 'footer-link', onClick: changeLocation.bind(undefined, "https://are.na") },
-                            'Are.na'
-                        )
-                    )
-                )
-            )
-        );
+                );
+            }
+        }
 
         return elem;
     }
@@ -298,46 +354,112 @@ var Header = React.createClass({
         var c2 = ['gt-sectra-fine-13'];
 
         var s0 = {
-            float: 'left',
             color: '#333333'
-        };
-        var s1 = {
-            textAlign: 'center',
-            position: 'absolute',
-            width: '100%',
-            left: '0px'
         };
         var s1_0 = {
             textDecoration: 'underline',
             marginLeft: '5px'
         };
         var s2 = {
-            float: 'right',
             color: '#c9c9c9'
         };
+        var s3 = {
+            'max-width': '900px',
+            'display': 'block',
+            'margin': 'auto'
+        };
+        var condition = null;
+        console.log(screen.width);
+        if (screen.width > 500) {
+            condition = React.createElement(
+                'div',
+                { style: s3 },
+                React.createElement(
+                    'div',
+                    { className: 'grid-cell' },
+                    React.createElement(
+                        'span',
+                        { style: s0, className: c0 },
+                        'CHRIS COY'
+                    )
+                ),
+                React.createElement('div', { className: 'grid-cell' }),
+                React.createElement(
+                    'div',
+                    { className: 'grid-cell' },
+                    React.createElement(
+                        'span',
+                        { className: c1 },
+                        'recent:',
+                        React.createElement(
+                            'span',
+                            { style: s1_0 },
+                            'Moscow ben hall'
+                        )
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'grid-cell' },
+                    React.createElement(
+                        'span',
+                        { style: s2, className: c2 },
+                        'email@chriscoychriscoy.com'
+                    )
+                )
+            );
+        } else {
+            var s = {};
+            var s1_1 = {};
+            var s1_2 = {};
+            s['padding-left'] = '25px';
+            s0['float'] = 'left';
+            s1_1['display'] = 'block';
+            s1_2['margin-top'] = '20px';
+            s1_0['marginLeft'] = '0px';
+            s2['float'] = 'right';
+            condition = React.createElement(
+                'div',
+                { style: s },
+                React.createElement(
+                    'div',
+                    null,
+                    React.createElement(
+                        'span',
+                        { style: s0, className: c0 },
+                        'CHRIS COY'
+                    ),
+                    ' ',
+                    React.createElement(
+                        'span',
+                        { style: s2, className: c2 },
+                        'email@chriscoychriscoy.com'
+                    )
+                ),
+                React.createElement(
+                    'div',
+                    { style: s1_1 },
+                    React.createElement(
+                        'div',
+                        { style: s1_2, className: c1 },
+                        'recent:'
+                    ),
+                    React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                            'span',
+                            { style: s1_0, className: c1 },
+                            'Moscow ben hall'
+                        )
+                    )
+                )
+            );
+        }
         return React.createElement(
             'div',
             { className: 'header' },
-            React.createElement(
-                'span',
-                { style: s0, className: c0 },
-                'CHRIS COY'
-            ),
-            React.createElement(
-                'span',
-                { style: s1, className: c1 },
-                'recent:',
-                React.createElement(
-                    'span',
-                    { style: s1_0 },
-                    'Moscow ben hall'
-                )
-            ),
-            React.createElement(
-                'span',
-                { style: s2, className: c2 },
-                'email@chriscoychriscoy.com'
-            )
+            condition
         );
     }
 });
@@ -400,7 +522,8 @@ var Content = React.createClass({
     getInitialState: function getInitialState() {
         return {
             currentContent: null,
-            lastConent: null
+            lastConent: null,
+            screenWidth: screen.width
         };
     },
     render: function render() {

@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         'connect': {
             'server': {
                 options: {
-                    port: 80,
+                    port: 3000,
                     directory: '/home/ubuntu/arena-reflux',
                     keepalive: true,
 		    index: 'index.html',

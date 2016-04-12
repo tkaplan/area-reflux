@@ -1,5 +1,14 @@
 @import 'common.less';
 
-div.header:extend(div.container) {
-    height: 30px;
+@media(max-width: 500px) {
+	div.header:extend(div.container) {
+	    position: relative;
+	}
+}
+
+@media(min-width: 500px) {
+	div.header:extend(div.container) {
+	    position: relative;
+	    top: -30px;
+	}
 }
