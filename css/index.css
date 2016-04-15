@@ -16,7 +16,7 @@ div.body {
   div.grid-cell {
     width: 225px;
     display: inline-block;
-    margin: 20px 0px;
+    margin: 14px 0px;
   }
 }
 img.img-item {
@@ -33,13 +33,19 @@ img.img-item {
 @media (max-width: 500px) {
   div.header {
     position: relative;
+    margin-bottom: 10px;
   }
 }
 @media (min-width: 500px) {
   div.header {
     position: relative;
     top: -30px;
+    margin-bottom: 16px;
   }
+}
+.home-link:hover,
+.link:hover {
+  cursor: pointer;
 }
 div.body {
   min-height: 300px;
@@ -68,11 +74,13 @@ div.body {
     opacity: .15;
     display: block;
     margin: auto;
+    max-height: 550px;
+    max-width: 650px;
   }
 }
 a.channel {
   font-family: gt-fine-book;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: underline;
   color: #333333;
 }
@@ -117,6 +125,7 @@ div.loader {
 }
 .footer-link {
   margin: 0px 5px;
+  text-decoration: underline;
 }
 .footer-link:hover {
   color: #ff0000;
@@ -141,6 +150,10 @@ div.loader {
 .gt-sectra-fine-15 {
   font-family: gt-fine-book;
   font-size: 15px;
+}
+.gt-sectra-fine-14 {
+  font-family: gt-fine-book;
+  font-size: 14px;
 }
 .gt-sectra-fine-13 {
   font-family: gt-fine-book;

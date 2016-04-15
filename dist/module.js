@@ -293,6 +293,7 @@ var Footer = React.createClass({
                             )
                         ),
                         React.createElement('div', { className: 'grid-cell' }),
+                        React.createElement('div', { className: 'grid-cell' }),
                         React.createElement(
                             'div',
                             { className: 'grid-cell' },
@@ -342,6 +343,8 @@ module.exports = Footer;
 },{"./helpers":5,"react":222,"react-dom":9}],4:[function(require,module,exports){
 'use strict';
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -349,8 +352,8 @@ var Header = React.createClass({
     displayName: 'Header',
 
     render: function render() {
-        var c0 = ['gt-sectra-display-15'];
-        var c1 = ['gt-sectra-display-15'];
+        var c0 = ['gt-sectra-display-15 home-link'];
+        var c1 = ['gt-sectra-display-15 link'];
         var c2 = ['gt-sectra-fine-13'];
 
         var s0 = {
@@ -369,7 +372,13 @@ var Header = React.createClass({
             'margin': 'auto'
         };
         var condition = null;
-        console.log(screen.width);
+        var goHome = function goHome() {
+            window.location.hash = "/";
+        };
+        var goRecent = function goRecent() {
+            window.location.hash = "/channel/cartoon-paintings/0";
+        };
+
         if (screen.width > 500) {
             condition = React.createElement(
                 'div',
@@ -379,11 +388,10 @@ var Header = React.createClass({
                     { className: 'grid-cell' },
                     React.createElement(
                         'span',
-                        { style: s0, className: c0 },
+                        { style: s0, className: c0, onClick: goHome.bind(undefined) },
                         'CHRIS COY'
                     )
                 ),
-                React.createElement('div', { className: 'grid-cell' }),
                 React.createElement(
                     'div',
                     { className: 'grid-cell' },
@@ -393,22 +401,25 @@ var Header = React.createClass({
                         'recent:',
                         React.createElement(
                             'span',
-                            { style: s1_0 },
-                            'Moscow ben hall'
+                            { style: s1_0, className: 'link', onClick: goRecent.bind(undefined) },
+                            'Cartoon Paintings'
                         )
                     )
                 ),
+                React.createElement('div', { className: 'grid-cell' }),
                 React.createElement(
                     'div',
                     { className: 'grid-cell' },
                     React.createElement(
                         'span',
                         { style: s2, className: c2 },
-                        'email@chriscoychriscoy.com'
+                        'email@seecoy.com'
                     )
                 )
             );
         } else {
+            var _React$createElement;
+
             var s = {};
             var s1_1 = {};
             var s1_2 = {};
@@ -426,7 +437,7 @@ var Header = React.createClass({
                     null,
                     React.createElement(
                         'span',
-                        { style: s0, className: c0 },
+                        { style: s0, className: c0, onClick: goHome.bind(undefined) },
                         'CHRIS COY'
                     ),
                     ' ',
@@ -449,8 +460,8 @@ var Header = React.createClass({
                         null,
                         React.createElement(
                             'span',
-                            { style: s1_0, className: c1 },
-                            'Moscow ben hall'
+                            (_React$createElement = { style: s1_0, className: c1 }, _defineProperty(_React$createElement, 'className', 'link'), _defineProperty(_React$createElement, 'onClick', goRecent.bind(undefined)), _React$createElement),
+                            'Cartoon Paintings'
                         )
                     )
                 )

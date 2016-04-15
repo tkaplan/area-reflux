@@ -3,6 +3,7 @@
 @media(max-width: 500px) {
 	div.header:extend(div.container) {
 	    position: relative;
+	    margin-bottom: 10px;
 	}
 }
 
@@ -10,5 +11,12 @@
 	div.header:extend(div.container) {
 	    position: relative;
 	    top: -30px;
+	    margin-bottom: 16px;
+	}
+}
+
+.home-link, .link {
+	&:hover {
+		cursor: pointer;
 	}
 }
