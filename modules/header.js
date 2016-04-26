@@ -20,7 +20,8 @@ var Header = React.createClass({
         let s3 = {
             'max-width': '900px',
             'display': 'block',
-            'margin': 'auto'
+            'margin': 'auto',
+            'margin-top': '36px'
         }
         let condition = null
         let goHome = () => {

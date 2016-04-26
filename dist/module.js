@@ -369,7 +369,8 @@ var Header = React.createClass({
         var s3 = {
             'max-width': '900px',
             'display': 'block',
-            'margin': 'auto'
+            'margin': 'auto',
+            'margin-top': '36px'
         };
         var condition = null;
         var goHome = function goHome() {
