@@ -185,20 +185,23 @@ var Channels = React.createClass({
         window.deregisterGlobalUpdate('Channels');
     },
     render: function render() {
-        var index = 0;
-        for (var i = 0; i < window.globalState.recent.contents.length; i++) {
-            if (window.globalState.recent.contents[i].image) {
-                index = i;
-                break;
-            }
-        }
+        // let index = 0
+        // for (let i = 0; i < window.globalState.recent.contents.length; i ++) {
+        //     if (window.globalState.recent.contents[i].image) {
+        //         index = i
+        //         break;
+        //     }
+        // }
+
+        var backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/589007/original_2d81100d207e2c167845cf7ac2aed2d7.jpg";
+
         return React.createElement(
             'div',
             { className: 'body', style: window.globalState.s0 },
             React.createElement(
                 'div',
                 { className: 'backgroundImg', style: window.globalState.s0 },
-                React.createElement('img', { className: 'backgroundImg', src: window.globalState.recent.contents[index].image.original.url })
+                React.createElement('img', { className: 'backgroundImg', src: backgroundUrl })
             ),
             window.globalState.table
         );
@@ -576,12 +579,34 @@ var Project = React.createClass({
             color: "#cccccc",
             float: "right"
         };
-        var renderImages = [];
+
+        var renderContent = [];
 
         if (!window.globalState.channels[this.props.params.index].contents) return React.createElement('div', null);
 
         window.globalState.channels[this.props.params.index].contents.forEach(function (content) {
-            if (content.image) renderImages.push(React.createElement('img', { className: 'img-item', src: content.image.original.url }));
+            if (content.class.toLowerCase() === 'image') {
+                renderContent.push(React.createElement('img', { className: 'img-item', src: content.image.original.url }));
+            } else if (content.class.toLowerCase() === 'media') {
+                var srcUrl = content.source.url.replace('watch?v=', 'embed/');
+                srcUrl = srcUrl.replace('vimeo.com/', 'player.vimeo.com/video/');
+                var smedia = {
+                    display: 'block',
+                    margin: '20px auto'
+                };
+                renderContent.push(React.createElement('iframe', { width: '420', height: '345', className: 'img-item', src: srcUrl, style: smedia }));
+            } else if (content.class.toLowerCase() === 'link') {
+                renderContent.push(React.createElement(
+                    'a',
+                    { className: 'channel', href: content.source.url },
+                    content.generated_title
+                ));
+            } else if (content.class.toLowerCase() === 'text') {
+                var contHtml = {
+                    __html: content.content_html
+                };
+                renderContent.push(React.createElement('div', { dangerouslySetInnerHTML: contHtml }));
+            }
         });
 
         var index = parseInt(this.props.params.index);
@@ -632,7 +657,7 @@ var Project = React.createClass({
             React.createElement(
                 'div',
                 null,
-                renderImages
+                renderContent
             )
         );
     }
