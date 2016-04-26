@@ -31,7 +31,7 @@ window.drawTable = function (channels) {
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < rows; j++) {
                 if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue
-                    table[j][i] = (
+                    table[i][j] = (
                         <div className="grid-cell">
                             <a className="channel" href={`#/channel/${channels[index].slug}/${index}`}>
                                 {channels[index].title}

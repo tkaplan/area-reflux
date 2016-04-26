@@ -44,7 +44,7 @@ window.drawTable = function (channels) {
         for (var i = 0; i < 4; i++) {
             for (var j = 0; j < rows; j++) {
                 if (j * 4 + i > channels.length - 1 || index > channels.length - 1) continue;
-                table[j][i] = React.createElement(
+                table[i][j] = React.createElement(
                     'div',
                     { className: 'grid-cell' },
                     React.createElement(
