@@ -193,7 +193,7 @@ var Channels = React.createClass({
         //     }
         // }
 
-        var backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/589007/original_2d81100d207e2c167845cf7ac2aed2d7.jpg";
+        var backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg";
 
         return React.createElement(
             'div',
@@ -218,6 +218,12 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var key = null;
 var hashState = false;
+var sort0 = {
+    color: '#bbbbbb'
+};
+var sort1 = {
+    color: '#bbbbbb'
+};
 var Footer = React.createClass({
     displayName: 'Footer',
 
@@ -235,6 +241,7 @@ var Footer = React.createClass({
         key();
     },
     render: function render() {
+        var self = this;
         var c0 = 'footer gt-pressura-13';
         var s0 = {
             color: "#bbbbbb"
@@ -252,6 +259,15 @@ var Footer = React.createClass({
                 return channel.title.toLowerCase();
             });
 
+            sort0 = {
+                color: '#666666'
+            };
+            sort1 = {
+                color: '#bbbbbb'
+            };
+
+            self.forceUpdate();
+
             window.triggerGlobalUpdate();
         };
 
@@ -259,6 +275,15 @@ var Footer = React.createClass({
             window.globalState.channels = Helpers.qsort(window.globalState.channels, function (channel) {
                 return new Date(channel.updated_at);
             }).reverse();
+
+            sort1 = {
+                color: '#666666'
+            };
+            sort0 = {
+                color: '#bbbbbb'
+            };
+
+            self.forceUpdate();
 
             window.triggerGlobalUpdate();
         };
@@ -284,13 +309,13 @@ var Footer = React.createClass({
                                 'SORT:',
                                 React.createElement(
                                     'span',
-                                    { className: 'footer-link', onClick: sortAZ.bind(undefined) },
+                                    { className: 'footer-link', style: sort0, onClick: sortAZ.bind(this) },
                                     'A-Z'
                                 ),
                                 ',',
                                 React.createElement(
                                     'span',
-                                    { className: 'footer-link', onClick: sortUpdate.bind(undefined) },
+                                    { className: 'footer-link', style: sort1, onClick: sortUpdate.bind(this) },
                                     'Last Updated'
                                 )
                             )
@@ -303,10 +328,10 @@ var Footer = React.createClass({
                             React.createElement(
                                 'span',
                                 null,
-                                'Built with:',
+                                'Built with',
                                 React.createElement(
                                     'span',
-                                    { className: 'footer-link', onClick: changeLocation.bind(undefined, "https://are.na") },
+                                    { className: 'footer-link', onClick: changeLocation.bind(this, "https://are.na") },
                                     'Are.na'
                                 )
                             )
@@ -323,13 +348,13 @@ var Footer = React.createClass({
                         'SORT:',
                         React.createElement(
                             'span',
-                            { className: 'footer-link', onClick: sortAZ.bind(undefined) },
+                            { className: 'footer-link', style: sort0, onClick: sortAZ.bind(this) },
                             'A-Z'
                         ),
                         ',',
                         React.createElement(
                             'span',
-                            { className: 'footer-link', onClick: sortUpdate.bind(undefined) },
+                            { className: 'footer-link', style: sort1, onClick: sortUpdate.bind(this) },
                             'Last Updated'
                         )
                     )
@@ -357,7 +382,7 @@ var Header = React.createClass({
     render: function render() {
         var c0 = ['gt-sectra-display-15 home-link'];
         var c1 = ['gt-sectra-display-15 link'];
-        var c2 = ['gt-sectra-fine-13'];
+        var c2 = ['grey gt-sectra-fine-15 link hover-red'];
 
         var s0 = {
             color: '#333333'
@@ -367,7 +392,7 @@ var Header = React.createClass({
             marginLeft: '5px'
         };
         var s2 = {
-            color: '#c9c9c9'
+            textDecoration: 'underline'
         };
         var s3 = {
             'max-width': '900px',
@@ -380,7 +405,7 @@ var Header = React.createClass({
             window.location.hash = "/";
         };
         var goRecent = function goRecent() {
-            window.location.hash = "/channel/cartoon-paintings/0";
+            window.location.hash = "/channel/single-hung/2";
         };
 
         if (screen.width > 500) {
@@ -406,7 +431,7 @@ var Header = React.createClass({
                         React.createElement(
                             'span',
                             { style: s1_0, className: 'link', onClick: goRecent.bind(undefined) },
-                            'Cartoon Paintings'
+                            'Single Hung'
                         )
                     )
                 ),
@@ -415,8 +440,8 @@ var Header = React.createClass({
                     'div',
                     { className: 'grid-cell' },
                     React.createElement(
-                        'span',
-                        { style: s2, className: c2 },
+                        'a',
+                        { style: s2, className: c2, href: 'mailto:email@seecoy.com' },
                         'email@seecoy.com'
                     )
                 )
@@ -465,7 +490,7 @@ var Header = React.createClass({
                         React.createElement(
                             'span',
                             (_React$createElement = { style: s1_0, className: c1 }, _defineProperty(_React$createElement, 'className', 'link'), _defineProperty(_React$createElement, 'onClick', goRecent.bind(undefined)), _React$createElement),
-                            'Cartoon Paintings'
+                            'Single Hung'
                         )
                     )
                 )

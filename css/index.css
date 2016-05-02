@@ -47,8 +47,12 @@ img.img-item {
 .link:hover {
   cursor: pointer;
 }
+.grey {
+  color: #c9c9c9;
+}
 div.body {
   min-height: 300px;
+  padding-top: 48px;
 }
 @media (max-width: 500px) {
   div.backgroundImg {
@@ -110,6 +114,7 @@ div.loader {
     bottom: 0px;
     max-width: 900px;
     margin: auto;
+    padding-bottom: 15px;
   }
 }
 @media (max-width: 500px) {
@@ -128,7 +133,7 @@ div.loader {
   text-decoration: underline;
 }
 .footer-link:hover {
-  color: #ff0000;
+  color: #ff0000 !important;
   cursor: pointer;
 }
 @font-face {

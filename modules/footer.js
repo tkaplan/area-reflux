@@ -3,6 +3,12 @@ var React = require('react')
 var ReactDOM = require('react-dom')
 var key = null
 var hashState = false
+var sort0 = {
+    color: '#bbbbbb'
+}
+var sort1 = {
+    color: '#bbbbbb'
+}
 var Footer = React.createClass({
     componentDidMount: function () {
         let self = this
@@ -17,7 +23,8 @@ var Footer = React.createClass({
     componentWillUnmount: function () {
         key()  
     },
-    render: () => {
+    render: function () {
+        let self = this;
         let c0 = 'footer gt-pressura-13'
         let s0 = {
             color: "#bbbbbb"
@@ -39,6 +46,15 @@ var Footer = React.createClass({
                     return channel.title.toLowerCase()
                 }
             )
+
+            sort0 = {
+                color: '#666666'
+            }
+            sort1 = {
+                color: '#bbbbbb'
+            }
+
+            self.forceUpdate();
             
             window.triggerGlobalUpdate()
         }
@@ -50,7 +66,16 @@ var Footer = React.createClass({
                     return new Date(channel.updated_at)
                 }
             ).reverse()
+
+            sort1 = {
+                color: '#666666'
+            }
+            sort0 = {
+                color: '#bbbbbb'
+            }
             
+            self.forceUpdate();
+
             window.triggerGlobalUpdate()
         }
         
@@ -65,15 +90,15 @@ var Footer = React.createClass({
                         <div className={c0} style={s0}>
                             <div className="grid-cell">
                                 <span>SORT:
-                                    <span className="footer-link" onClick={sortAZ.bind(this)}>A-Z</span>, 
-                                    <span className="footer-link" onClick={sortUpdate.bind(this)}>Last Updated</span>
+                                    <span className="footer-link" style={sort0} onClick={sortAZ.bind(this)}>A-Z</span>, 
+                                    <span className="footer-link" style={sort1} onClick={sortUpdate.bind(this)}>Last Updated</span>
                                 </span>
                             </div>
                             <div className="grid-cell"></div>
                             <div className="grid-cell"></div>
                             <div className="grid-cell">
                                 <span>
-                                    Built with:
+                                    Built with
                                     <span className="footer-link" onClick={changeLocation.bind(this,"https://are.na")}>Are.na</span>
                                 </span>
                             </div>
@@ -84,8 +109,8 @@ var Footer = React.createClass({
                 elem = (
                     <div className={c0} style={s0}>
                         <span>SORT:
-                            <span className="footer-link" onClick={sortAZ.bind(this)}>A-Z</span>, 
-                            <span className="footer-link" onClick={sortUpdate.bind(this)}>Last Updated</span>
+                            <span className="footer-link" style={sort0} onClick={sortAZ.bind(this)}>A-Z</span>, 
+                            <span className="footer-link" style={sort1} onClick={sortUpdate.bind(this)}>Last Updated</span>
                         </span>
                     </div>
                 )

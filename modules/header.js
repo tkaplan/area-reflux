@@ -5,7 +5,7 @@ var Header = React.createClass({
     render: () => {
         let c0 = ['gt-sectra-display-15 home-link']
         let c1 = ['gt-sectra-display-15 link']
-        let c2 = ['gt-sectra-fine-13']
+        let c2 = ['grey gt-sectra-fine-15 link hover-red']
         
         let s0 = {
             color: '#333333'
@@ -15,7 +15,7 @@ var Header = React.createClass({
             marginLeft: '5px'
         }
         let s2 = {
-            color: '#c9c9c9'
+            textDecoration: 'underline'
         }
         let s3 = {
             'max-width': '900px',
@@ -28,7 +28,7 @@ var Header = React.createClass({
             window.location.hash = "/"
         }
         let goRecent = () => {
-            window.location.hash = "/channel/cartoon-paintings/0"
+            window.location.hash = "/channel/single-hung/2"
         }
 
         if (screen.width > 500) {
@@ -39,13 +39,13 @@ var Header = React.createClass({
                     </div>
                     <div className="grid-cell">
                         <span className={c1}>recent: 
-                            <span style={s1_0} className="link" onClick={goRecent.bind(this)}>Cartoon Paintings</span>
+                            <span style={s1_0} className="link" onClick={goRecent.bind(this)}>Single Hung</span>
                         </span>
                     </div>
                     <div className="grid-cell">
                     </div>
                     <div className="grid-cell">
-                        <span style={s2} className={c2}>email@seecoy.com</span>
+                        <a style={s2} className={c2} href="mailto:email@seecoy.com">email@seecoy.com</a>
                     </div>
                 </div>
             )
@@ -69,7 +69,7 @@ var Header = React.createClass({
                     <div style={s1_1}>
                         <div style={s1_2} className={c1}>recent:</div>
                         <div>
-                            <span style={s1_0} className={c1} className="link" onClick={goRecent.bind(this)}>Cartoon Paintings</span>
+                            <span style={s1_0} className={c1} className="link" onClick={goRecent.bind(this)}>Single Hung</span>
                         </div>
                     </div>
                 </div>

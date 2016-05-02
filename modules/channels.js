@@ -25,7 +25,7 @@ var Channels = React.createClass({
         //     }
         // }
 
-        let backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/589007/original_2d81100d207e2c167845cf7ac2aed2d7.jpg"
+        let backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg"
         
         return (
             <div className="body" style={window.globalState.s0}>
