@@ -35,6 +35,11 @@ var Footer = React.createClass({
             left: '0px',
             width: '100%'
         }
+        let s2 = {
+            width: '900px',
+            display: 'block',
+            margin: 'auto'
+        }
         let elem = (
             <div></div>
         )
@@ -88,19 +93,21 @@ var Footer = React.createClass({
                 elem = (
                     <div style={s1}>
                         <div className={c0} style={s0}>
-                            <div className="grid-cell">
-                                <span>SORT:
-                                    <span className="footer-link" style={sort0} onClick={sortAZ.bind(this)}>A-Z</span>, 
-                                    <span className="footer-link" style={sort1} onClick={sortUpdate.bind(this)}>Last Updated</span>
-                                </span>
-                            </div>
-                            <div className="grid-cell"></div>
-                            <div className="grid-cell"></div>
-                            <div className="grid-cell">
-                                <span>
-                                    Built with
-                                    <span className="footer-link" onClick={changeLocation.bind(this,"https://are.na")}>Are.na</span>
-                                </span>
+                            <div style={s2}>
+                                <div className="grid-cell">
+                                    <span>SORT:
+                                        <span className="footer-link" style={sort0} onClick={sortAZ.bind(this)}>A-Z</span>, 
+                                        <span className="footer-link" style={sort1} onClick={sortUpdate.bind(this)}>Last Updated</span>
+                                    </span>
+                                </div>
+                                <div className="grid-cell"></div>
+                                <div className="grid-cell"></div>
+                                <div className="grid-cell">
+                                    <span>
+                                        Built with
+                                        <span className="footer-link" onClick={changeLocation.bind(this,"https://are.na")}>Are.na</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

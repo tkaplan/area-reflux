@@ -111,8 +111,9 @@ div.loader {
 }
 @media (min-width: 500px) {
   div.footer {
+    position: fixed;
     bottom: 0px;
-    max-width: 900px;
+    width: 100%;
     margin: auto;
     padding-bottom: 15px;
   }
@@ -120,7 +121,7 @@ div.loader {
 @media (max-width: 500px) {
   div.footer {
     bottom: 0px;
-    position: absolute;
+    position: fixed;
     width: 100%;
     border-top: 1px solid rgba(193, 193, 193, 0.58);
     padding: 10px;

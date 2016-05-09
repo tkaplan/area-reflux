@@ -110,7 +110,7 @@ var Body = React.createClass({
     componentDidMount: function componentDidMount() {
         var _this = this;
 
-        fetch(api.auth.usersChannel('414')).then(function (response) {
+        fetch(api.channels).then(function (response) {
             return response.json();
         }).then(function (response) {
             _this.loader = {
@@ -142,7 +142,7 @@ var Body = React.createClass({
                 };
                 window.triggerGlobalUpdate();
             };
-            img.src = channels[0].contents[0].image.original.url;
+            img.src = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg";
             _this.forceUpdate();
         });
     },
@@ -185,13 +185,6 @@ var Channels = React.createClass({
         window.deregisterGlobalUpdate('Channels');
     },
     render: function render() {
-        // let index = 0
-        // for (let i = 0; i < window.globalState.recent.contents.length; i ++) {
-        //     if (window.globalState.recent.contents[i].image) {
-        //         index = i
-        //         break;
-        //     }
-        // }
 
         var backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg";
 
@@ -252,6 +245,11 @@ var Footer = React.createClass({
             left: '0px',
             width: '100%'
         };
+        var s2 = {
+            width: '900px',
+            display: 'block',
+            margin: 'auto'
+        };
         var elem = React.createElement('div', null);
 
         var sortAZ = function sortAZ() {
@@ -302,37 +300,41 @@ var Footer = React.createClass({
                         { className: c0, style: s0 },
                         React.createElement(
                             'div',
-                            { className: 'grid-cell' },
+                            { style: s2 },
                             React.createElement(
-                                'span',
-                                null,
-                                'SORT:',
+                                'div',
+                                { className: 'grid-cell' },
                                 React.createElement(
                                     'span',
-                                    { className: 'footer-link', style: sort0, onClick: sortAZ.bind(this) },
-                                    'A-Z'
-                                ),
-                                ',',
-                                React.createElement(
-                                    'span',
-                                    { className: 'footer-link', style: sort1, onClick: sortUpdate.bind(this) },
-                                    'Last Updated'
+                                    null,
+                                    'SORT:',
+                                    React.createElement(
+                                        'span',
+                                        { className: 'footer-link', style: sort0, onClick: sortAZ.bind(this) },
+                                        'A-Z'
+                                    ),
+                                    ',',
+                                    React.createElement(
+                                        'span',
+                                        { className: 'footer-link', style: sort1, onClick: sortUpdate.bind(this) },
+                                        'Last Updated'
+                                    )
                                 )
-                            )
-                        ),
-                        React.createElement('div', { className: 'grid-cell' }),
-                        React.createElement('div', { className: 'grid-cell' }),
-                        React.createElement(
-                            'div',
-                            { className: 'grid-cell' },
+                            ),
+                            React.createElement('div', { className: 'grid-cell' }),
+                            React.createElement('div', { className: 'grid-cell' }),
                             React.createElement(
-                                'span',
-                                null,
-                                'Built with',
+                                'div',
+                                { className: 'grid-cell' },
                                 React.createElement(
                                     'span',
-                                    { className: 'footer-link', onClick: changeLocation.bind(this, "https://are.na") },
-                                    'Are.na'
+                                    null,
+                                    'Built with',
+                                    React.createElement(
+                                        'span',
+                                        { className: 'footer-link', onClick: changeLocation.bind(this, "https://are.na") },
+                                        'Are.na'
+                                    )
                                 )
                             )
                         )
@@ -587,6 +589,13 @@ var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
 var Channels = require('./channels');
 
+var api = {};
+api.base = 'http://api.are.na/v2';
+api.channels = api.base + '/channels';
+api.channel = function (id) {
+    return api.base + '/channels/' + id;
+};
+
 var Project = React.createClass({
     displayName: 'Project',
 
@@ -607,31 +616,33 @@ var Project = React.createClass({
 
         var renderContent = [];
 
-        if (!window.globalState.channels[this.props.params.index].contents) return React.createElement('div', null);
-
-        window.globalState.channels[this.props.params.index].contents.forEach(function (content) {
-            if (content.class.toLowerCase() === 'image') {
-                renderContent.push(React.createElement('img', { className: 'img-item', src: content.image.original.url }));
-            } else if (content.class.toLowerCase() === 'media') {
-                var srcUrl = content.source.url.replace('watch?v=', 'embed/');
-                srcUrl = srcUrl.replace('vimeo.com/', 'player.vimeo.com/video/');
-                var smedia = {
-                    display: 'block',
-                    margin: '20px auto'
-                };
-                renderContent.push(React.createElement('iframe', { width: '420', height: '345', className: 'img-item', src: srcUrl, style: smedia }));
-            } else if (content.class.toLowerCase() === 'link') {
-                renderContent.push(React.createElement(
-                    'a',
-                    { className: 'channel', href: content.source.url },
-                    content.generated_title
-                ));
-            } else if (content.class.toLowerCase() === 'text') {
-                var contHtml = {
-                    __html: content.content_html
-                };
-                renderContent.push(React.createElement('div', { dangerouslySetInnerHTML: contHtml }));
-            }
+        fetch(api.channel(this.props.params.index)).then(function (response) {
+            return response.json();
+        }).then(function (response) {
+            response.contents.forEach(function (content) {
+                if (content.class.toLowerCase() === 'image') {
+                    renderContent.push(React.createElement('img', { className: 'img-item', src: content.image.original.url }));
+                } else if (content.class.toLowerCase() === 'media') {
+                    var srcUrl = content.source.url.replace('watch?v=', 'embed/');
+                    srcUrl = srcUrl.replace('vimeo.com/', 'player.vimeo.com/video/');
+                    var smedia = {
+                        display: 'block',
+                        margin: '20px auto'
+                    };
+                    renderContent.push(React.createElement('iframe', { width: '420', height: '345', className: 'img-item', src: srcUrl, style: smedia }));
+                } else if (content.class.toLowerCase() === 'link') {
+                    renderContent.push(React.createElement(
+                        'a',
+                        { className: 'channel', href: content.source.url },
+                        content.generated_title
+                    ));
+                } else if (content.class.toLowerCase() === 'text') {
+                    var contHtml = {
+                        __html: content.content_html
+                    };
+                    renderContent.push(React.createElement('div', { dangerouslySetInnerHTML: contHtml }));
+                }
+            });
         });
 
         var index = parseInt(this.props.params.index);

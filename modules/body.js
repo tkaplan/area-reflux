@@ -96,7 +96,7 @@ var Body = React.createClass({
         return window.globalState
     },
     componentDidMount: function () {
-        fetch(api.auth.usersChannel('414')).then(
+        fetch(api.channels).then(
             (response) => {
                 return response.json()
             }
@@ -131,7 +131,7 @@ var Body = React.createClass({
                     }
                     window.triggerGlobalUpdate()
                 }
-                img.src = channels[0].contents[0].image.original.url
+                img.src = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg"
                 this.forceUpdate()
             }
         )

@@ -3,6 +3,11 @@ var ReactDOM = require('react-dom')
 var ReactRouter = require('react-router')
 var Channels = require('./channels')
 
+const api = {}
+api.base = 'http://api.are.na/v2'
+api.channels = `${api.base}/channels`
+api.channel = id => `${api.base}/channels/${id}`
+
 var Project = React.createClass({
     componentDidMount: function () {
         if (this.props.params && this.props.params.index) {
@@ -21,41 +26,46 @@ var Project = React.createClass({
         }
 
         let renderContent = []
-        
-        if (!window.globalState.channels[this.props.params.index].contents)
-            return (<div></div>)
-        
-        window.globalState.channels[this.props.params.index].contents.forEach(function(content) {
-            if (content.class.toLowerCase() === 'image') {
-                renderContent.push(
-                    <img className="img-item" src={content.image.original.url}/>
-                )
-            } else if (content.class.toLowerCase() === 'media') {
-                let srcUrl = content.source.url.replace('watch?v=', 'embed/')
-                srcUrl = srcUrl.replace('vimeo.com/','player.vimeo.com/video/')
-                let smedia = {
-                    display: 'block',
-                    margin: '20px auto'
-                }
-                renderContent.push(
-                    <iframe width="420" height="345" className="img-item" src={srcUrl} style={smedia}/>
-                )
-            } else if (content.class.toLowerCase() === 'link') {
-                renderContent.push(
-                    <a className="channel" href={content.source.url}>
-                        {content.generated_title}
-                    </a>
-                )
-            } else if (content.class.toLowerCase() === 'text') {
-                let contHtml = {
-                    __html: content.content_html
-                }
-                renderContent.push(
-                    <div dangerouslySetInnerHTML={contHtml}>
-                    </div>
-                )
+
+        fetch(api.channel(this.props.params.index)).then(
+            (response) => {
+                return response.json()
             }
-        })
+        ).then(
+            (response) => {
+                response.contents.forEach((content) => {
+                    if (content.class.toLowerCase() === 'image') {
+                        renderContent.push(
+                            <img className="img-item" src={content.image.original.url}/>
+                        )
+                    } else if (content.class.toLowerCase() === 'media') {
+                        let srcUrl = content.source.url.replace('watch?v=', 'embed/')
+                        srcUrl = srcUrl.replace('vimeo.com/','player.vimeo.com/video/')
+                        let smedia = {
+                            display: 'block',
+                            margin: '20px auto'
+                        }
+                        renderContent.push(
+                            <iframe width="420" height="345" className="img-item" src={srcUrl} style={smedia}/>
+                        )
+                    } else if (content.class.toLowerCase() === 'link') {
+                        renderContent.push(
+                            <a className="channel" href={content.source.url}>
+                                {content.generated_title}
+                            </a>
+                        )
+                    } else if (content.class.toLowerCase() === 'text') {
+                        let contHtml = {
+                            __html: content.content_html
+                        }
+                        renderContent.push(
+                            <div dangerouslySetInnerHTML={contHtml}>
+                            </div>
+                        )
+                    }
+                })
+            }
+        )
         
         let index = parseInt(this.props.params.index)
         

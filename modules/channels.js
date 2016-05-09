@@ -17,13 +17,6 @@ var Channels = React.createClass({
        window.deregisterGlobalUpdate('Channels')
     },
     render: function () {
-        // let index = 0
-        // for (let i = 0; i < window.globalState.recent.contents.length; i ++) {
-        //     if (window.globalState.recent.contents[i].image) {
-        //         index = i
-        //         break;
-        //     }
-        // }
 
         let backgroundUrl = "https://d2w9rnfcy7mm78.cloudfront.net/592510/original_96c95fcd7888591a6e965ff4316eca66.jpg"
         
